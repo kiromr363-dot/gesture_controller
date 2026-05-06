@@ -1,12 +1,10 @@
-Entername: gesture_controller
-description: تطبيق للتحكم بالإيماءات بدون لمس
-
+name: gesture_controller
+description: A new Flutter project for AI gesture control.
 publish_to: 'none'
-
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.0 <3.0.0'
+  sdk: '>=3.1.0 <4.0.0'
 
 dependencies:
   flutter:
