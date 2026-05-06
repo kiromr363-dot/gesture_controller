@@ -1,23 +1,28 @@
-name: CI/CD لبناء تطبيق الإيماءات
 
+name: Build Android APK
 on:
-  push: # يتم التشغيل تلقائياً عند رفع أي كود جديد
+  push:
     branches: [ main ]
 
 jobs:
   build-android:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4 # 1. تحميل الكود
-
-      - uses: subosito/flutter-action@v2 # 2. تجهيز بيئة Flutter
+      - uses: actions/checkout@v4 # تحديث للإصدار 4
+      
+      - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.16.0'
+          channel: 'stable'
 
-      - run: flutter pub get # 3. تحميل المكتبات
-      - run: flutter build apk --release # 4. بناء التطبيق
+      - name: Install dependencies
+        run: flutter pub get
 
-      - uses: actions/upload-artifact@v4 # 5. رفع ملف APK كنتاج
+      - name: Build APK
+        run: flutter build apk --release
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4 # تحديث للإصدار 4
         with:
           name: gesture-release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
